@@ -1,5 +1,5 @@
 
-# RRun local
+# Run local
 
 ## Edit config.py
 
