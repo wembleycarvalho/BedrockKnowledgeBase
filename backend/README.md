@@ -3,7 +3,9 @@
 
 ## Edit config.py
 
-vi config.py
+```
+$ vi config.py
+```
 
 ## To manually create a virtualenv on MacOS and Linux:
 
