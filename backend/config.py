@@ -1,2 +1,2 @@
-bucket_nameFrontEnd = "wembleyapilambdakbdemo"
-KNOWLEDGE_BASE_ID = "CDOKDZYYWV"
+bucket_nameFrontEnd = <<BUCKET_TO_BE_CREATED>>
+KNOWLEDGE_BASE_ID = KNOWLEDGE_BASE_ID
