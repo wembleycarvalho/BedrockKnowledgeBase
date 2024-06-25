@@ -13,8 +13,10 @@ from aws_cdk import (
     RemovalPolicy,
     aws_lambda_python_alpha as lambda_python,
 )
+from config import (KNOWLEDGE_BASE_ID, bucket_nameFrontEnd )
 import json
 import os
+
 
 class ApiLambdaKBDemo(Stack):
 
@@ -23,9 +25,7 @@ class ApiLambdaKBDemo(Stack):
 
         # Variaveis a serem alteradas
 
-        bucket_nameFrontEnd = "wembleyapilambdakbdemo"
-        KNOWLEDGE_BASE_ID = "CDOKDZYYWV"
-        base_apiURL = "https://rt03q139eb.execute-api.us-east-1.amazonaws.com/prod/"
+        
 
         # Cria uma camada da AWS Lambda a partir do arquivo local 'boto3.zip'
         boto3_layer = _lambda.LayerVersion(
@@ -123,28 +123,6 @@ class ApiLambdaKBDemo(Stack):
             "DistributionDomainName",
             value=distribution.distribution_domain_name,
             description="CloudFront Distribution Domain Name",
-        )
-
-        # Ler o conteúdo do arquivo index.html
-        with open("./frontend_template/index_template.html", "r") as file:
-            html_content = file.read()
-
-        # Substituir as variáveis no conteúdo do HTML
-        html_content = html_content.replace("BASE_URL", base_apiURL)
-
-        # Criar o diretório "frontend" se ele não existir
-        if not os.path.exists("./frontend"):
-            os.makedirs("./frontend")
-
-        # Gravar o conteúdo renderizado em um novo arquivo index.html
-        with open("./frontend/index.html", "w") as file:
-            file.write(html_content)
-
-        s3_deployment.BucketDeployment(
-            self,
-            "DeployWebsite",
-            sources=[s3_deployment.Source.asset("./frontend")],
-            destination_bucket=origin_bucket
         )
 
 app = App()
