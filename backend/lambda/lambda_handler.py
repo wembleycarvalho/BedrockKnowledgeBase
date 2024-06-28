@@ -17,7 +17,9 @@ kb_id = os.environ.get("KNOWLEDGE_BASE_ID")
 model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
 model_arn = f'arn:aws:bedrock:{region}::foundation-model/{model_id}'
 
+prompt_base=os.environ.get("PROMPT_BASE")
 
+    
 def retrieveAndGenerate(prompt, retrieveParam):
     return bedrock_agent_runtime.retrieve_and_generate(
         input={
@@ -29,9 +31,8 @@ def retrieveAndGenerate(prompt, retrieveParam):
     
 def lambda_handler(event, context):
 
-    #parameter = {'prompt': 'me fale sobre cores', 'fildter' : "portugues" }
     print(event)
-    prompt = event["prompt"]
+    prompt = prompt_base.format(texto=event["prompt"])
     
     print(boto3.__version__)
     print(botocore.__version__)

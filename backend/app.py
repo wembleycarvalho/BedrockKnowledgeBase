@@ -10,10 +10,9 @@ from aws_cdk import (
     CfnOutput,
     aws_cloudfront_origins as origins,
     aws_s3_deployment as s3_deployment,
-    RemovalPolicy,
-    aws_lambda_python_alpha as lambda_python,
+    RemovalPolicy
 )
-from config import (KNOWLEDGE_BASE_ID, bucket_nameFrontEnd )
+from config import (KNOWLEDGE_BASE_ID, bucket_nameFrontEnd, PROMPT_BASE )
 import json
 import os
 
@@ -39,7 +38,8 @@ class ApiLambdaKBDemo(Stack):
             runtime=_lambda.Runtime.PYTHON_3_12,
             code=_lambda.Code.from_asset('lambda'),
             environment={ # ADD THIS, FILL IT FOR ACTUAL VALUE 
-                    "KNOWLEDGE_BASE_ID": KNOWLEDGE_BASE_ID
+                    "KNOWLEDGE_BASE_ID": KNOWLEDGE_BASE_ID,
+                    "PROMPT_BASE": PROMPT_BASE
             },
             timeout=Duration.minutes(1),
             layers=[boto3_layer]

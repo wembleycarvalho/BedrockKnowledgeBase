@@ -11,6 +11,7 @@ const PromptSubmit = () => {
 
   const handleSubmit = async () => {
     try {
+      setData()
       const params = {
         prompt: prompt || "undefined",
         filter: filter || "undefined",
@@ -59,10 +60,18 @@ const PromptSubmit = () => {
                 ))}
                 <hr></hr>
                 <h3>Referências:</h3>
+
                 {data.body.citations.map((citation, index) => (
-                  <div key={index}>
-                    {JSON.stringify(citation.retrievedReferences[index].location.s3Location.uri, null, 2)}
-                  </div>
+                    <div key={index}>
+                     {citation.retrievedReferences[0] &&
+                        citation.retrievedReferences[0].location ? (
+                          JSON.stringify(
+                            citation.retrievedReferences[0].location.s3Location,null,2
+                          )
+                        ) : (
+                          <span></span>
+                        )}
+                    </div>
                 ))}
               </div>
             )}
