@@ -22,10 +22,6 @@ class ApiLambdaKBDemo(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-        # Variaveis a serem alteradas
-
-        
-
         # Cria uma camada da AWS Lambda a partir do arquivo local 'boto3.zip'
         boto3_layer = _lambda.LayerVersion(
             self, 'Boto3Layer',
